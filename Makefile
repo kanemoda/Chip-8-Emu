@@ -1,7 +1,7 @@
 INCLUDES = -I ./include `sdl2-config --cflags`
 FLAGS= -g
 LIBS = `sdl2-config --libs` 
-OBJECTS=./build/chip8_memory.o ./build/chip8_stack.o
+OBJECTS=./build/chip8_memory.o ./build/chip8_stack.o ./build/chip8_keyboard.o
 all: ${OBJECTS}
 	gcc ${FLAGS} ${INCLUDES} ./src/main.c ${OBJECTS} -o ./bin/main ${LIBS}
 
@@ -10,6 +10,9 @@ all: ${OBJECTS}
 
 ./build/chip8_stack.o: ./src/chip8_stack.c
 	gcc ${FLAGS} ${INCLUDES} ./src/chip8_stack.c -c -o ./build/chip8_stack.o
+
+./build/chip8_keyboard.o: ./src/chip8_keyboard.c
+	gcc ${FLAGS} ${INCLUDES} ./src/chip8_keyboard.c -c -o ./build/chip8_keyboard.o
 run:
 	./bin/main
 
