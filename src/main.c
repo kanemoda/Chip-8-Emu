@@ -27,7 +27,8 @@ int main(int argc, char const *argv[])
 {
     struct chip8 chip8;
     chip8_init(&chip8);
-    chip8_screen_set(&chip8.screen, 10,1);
+
+    chip8_screen_draw_sprite(&chip8.screen, 62, 10, &chip8.memory.memory[CHIP8_FONTSET_START_ADDRESS], 5);
 
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow(
