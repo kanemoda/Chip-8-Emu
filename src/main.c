@@ -3,6 +3,7 @@
 #include "chip8.h"
 #include "chip8_keyboard.h"
 #include <stdbool.h>
+#include <sound.h>
 
 const char keyboard_map[CHIP8_TOTAL_KEYS] = {
     SDLK_1,
@@ -27,7 +28,7 @@ int main(int argc, char const *argv[])
 {
     struct chip8 chip8;
     chip8_init(&chip8);
-    chip8.registers.DT = 255;
+    chip8.registers.ST = 30;
 
     chip8_screen_draw_sprite(&chip8.screen, 62, 10, &chip8.memory.memory[CHIP8_FONTSET_START_ADDRESS], 5);
 
@@ -107,6 +108,13 @@ int main(int argc, char const *argv[])
             chip8.registers.DT -=1;
             printf("Delay!!!\n");
         }
+
+        if (chip8.registers.ST > 0)
+        {
+            Beep(1500, 100 * chip8.registers.ST);
+            chip8.registers.ST = 0;
+        }
+        
         
     }
 
