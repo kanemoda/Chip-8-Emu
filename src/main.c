@@ -27,6 +27,7 @@ int main(int argc, char const *argv[])
 {
     struct chip8 chip8;
     chip8_init(&chip8);
+    chip8.registers.DT = 255;
 
     chip8_screen_draw_sprite(&chip8.screen, 62, 10, &chip8.memory.memory[CHIP8_FONTSET_START_ADDRESS], 5);
 
@@ -99,6 +100,14 @@ int main(int argc, char const *argv[])
         }
 
         SDL_RenderPresent(renderer);
+
+        if (chip8.registers.DT > 0)
+        {
+            SDL_Delay(100);
+            chip8.registers.DT -=1;
+            printf("Delay!!!\n");
+        }
+        
     }
 
 out:
