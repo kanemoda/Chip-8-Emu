@@ -2,7 +2,7 @@ INCLUDES = -I ./include `sdl2-config --cflags`
 FLAGS= -g
 LIBS = `sdl2-config --libs` -lm -lpthread
 OBJECTS=./build/chip8_memory.o ./build/chip8_stack.o ./build/chip8_keyboard.o ./build/chip8.o ./build/chip8_screen.o ./build/sound.o
-all: ${OBJECTS}
+all: prepare ${OBJECTS}
 	gcc ${FLAGS} ${INCLUDES} ./src/main.c ${OBJECTS} -o ./bin/main ${LIBS}
 
 ./build/chip8_memory.o: ./src/chip8_memory.c
@@ -24,6 +24,9 @@ all: ${OBJECTS}
 	gcc ${FLAGS} ${INCLUDES} ./src/sound.c -c -o ./build/sound.o
 run:
 	./bin/main
+
+prepare:
+	mkdir -p build bin
 
 clean:
 	rm -f ./bin/main
